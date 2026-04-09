@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JokeByName 😂</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800&family=Playfair+Display:ital,wght@0,700;1,400;1,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+  <!-- ── BACKGROUND BLOBS ── -->
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+
+  <!-- ── HEADER ── -->
+  <header class="site-header">
+    <div class="logo">
+      <span class="logo-emoji">😂</span>
+      <span class="logo-text">JokeByName</span>
+    </div>
+    <div class="header-tag">Powered by JokeAPI v2</div>
+  </header>
+
+  <!-- ── HERO ── -->
+  <section class="hero">
+    <p class="hero-kicker">Your name. Your joke. Every time.</p>
+    <h1 class="hero-title">
+      What's your<br/>
+      <em>name</em>, funny&nbsp;person?
+    </h1>
+    <p class="hero-sub">
+      Enter your name and we'll fetch a personalised joke just for you —
+      
+    </p>
+  </section>
+
+  <!-- ── FORM ── -->
+  <section class="form-section">
+    <div class="form-card">
+      <form id="joke-form" autocomplete="off">
+        <div class="input-group">
+          <input
+            type="text"
+            id="name-input"
+            name="name"
+            placeholder="e.g. Cian, Bethan, Chris…"
+            maxlength="60"
+            required
+            aria-label="Your name"
+          />
+          <button type="submit" class="btn-get" id="submit-btn">
+            <span class="btn-label">Get My Joke</span>
+            <span class="btn-icon">→</span>
+          </button>
+        </div>
+        <p class="form-hint">Your name decides the joke category — it's deterministic!</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ── JOKE RESULT ── -->
+  <section id="result-section" class="result-section hidden">
+
+    <!-- Category badge & name greeting -->
+    <div class="result-meta">
+      <span class="result-name" id="result-name"></span>
+      <span class="result-cat" id="result-cat"></span>
+    </div>
+
+    <!-- Joke card -->
+    <div class="joke-card" id="joke-card">
+      <!-- Injected by JS -->
+    </div>
+
+    <!-- Actions -->
+    <div class="result-actions">
+      <button class="btn-action" id="btn-another">🔄 &nbsp;Another Joke</button>
+      <button class="btn-action btn-random" id="btn-random">🎲 &nbsp;Random Joke</button>
+      <button class="btn-action btn-share" id="btn-share">📋 &nbsp;Copy Joke</button>
+    </div>
+
+  </section>
+
+  <!-- ── HOW IT WORKS ── -->
+  <section class="how-section">
+    <h2 class="how-title">How it works</h2>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">01</div>
+        <div class="how-body">
+          <h3>You enter your name</h3>
+          <p>The form sends a <code>GET /api/joke?name=…</code> request to our <strong>Express.js</strong> server.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">02</div>
+        <div class="how-body">
+          <h3>Express picks a category</h3>
+          <p>The server hashes your name and selects a joke category — same name always picks the same type.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">03</div>
+        <div class="how-body">
+          <h3>Axios fetches the joke</h3>
+          <p><strong>Axios</strong> makes a server-side HTTP call to <em>JokeAPI v2</em> and returns the result as clean JSON.</p>
+        </div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">04</div>
+        <div class="how-body">
+          <h3>You laugh (hopefully)</h3>
+          <p>The client receives the JSON and renders the joke — no page reload needed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <p>Built with <strong>Express.js</strong> · <strong>Node.js</strong> · <strong>Axios</strong></p>
+    <p class="footer-api">Joke data from <a href="https://sv443.net/jokeapi/v2/" target="_blank" rel="noopener">JokeAPI v2 by Sv443</a></p>
+  </footer>
+
+  <!-- ── LOADING OVERLAY ── -->
+  <div id="loading" class="loading hidden">
+    <div class="loading-dots">
+      <span></span><span></span><span></span>
+    </div>
+    <p>Fetching your joke…</p>
+  </div>
+
+  <!-- ── TOAST ── -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
